@@ -7,7 +7,15 @@ import json
 
 
 
-def main(imagesFolder,videoFile):
+#thresholding
+def thresholding(image):
+    return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+
+def get_grayscale(image):
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+
+def main(imagesFolder,videoFile,outputFile):
     reader = easyocr.Reader(['en']) 
     cap = cv2.VideoCapture(videoFile)
     frameRate = cap.get(5) #frame rate
@@ -37,14 +45,15 @@ def main(imagesFolder,videoFile):
     print("Done!")
 
 
-    with open('file.txt', 'w') as file:
+    with open(outputFile, 'w') as file:
         file.write(json.dumps(map_sec_to_text))
 
 
 if __name__ == "__main__":
     images_path = "images"
-    video_path = "ocr.mp4"
-    main(images_path,video_path)
+    video_path = sys.argv[0]
+    output_file_path = os.path.basename(video_path).split(".")[0] + ".txt" 
+    main(images_path,video_path,output_file_path)
 
 
 
