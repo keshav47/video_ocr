@@ -51,7 +51,7 @@ def main(imagesFolder,videoFile,outputFile):
 
 if __name__ == "__main__":
     images_path = "images"
-    video_path = sys.argv[0]
+    video_path = sys.argv[1]
     output_file_path = os.path.basename(video_path).split(".")[0] + ".txt" 
     print(f"Creating {output_file_path} for {video_path}")
     main(images_path,video_path,output_file_path)
