@@ -4,7 +4,7 @@ from tqdm import tqdm
 import easyocr
 import sys
 import json
-
+import os
 
 
 #thresholding
